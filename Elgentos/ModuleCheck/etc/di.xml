@@ -4,7 +4,7 @@
     <type name="Magento\Framework\Console\CommandList">
         <arguments>
             <argument name="commands" xsi:type="array">
-                <item name="check_module_usage" xsi:type="object">Vendor\ModuleCheck\Console\Command\CheckModuleUsage</item>
+                <item name="check_module_usage" xsi:type="object">Elgentos\ModuleCheck\Command\CheckModuleUsage</item>
             </argument>
         </arguments>
     </type>
