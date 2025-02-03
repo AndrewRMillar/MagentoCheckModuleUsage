@@ -2,59 +2,54 @@
 
 declare(strict_types=1);
 
-namespace Vendor\ModuleCheck\Console\Command;
+namespace Elgentos\ModuleCheck\Command;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Framework\Module\ModuleListInterface;
-use Magento\Framework\Filesystem\Driver\File;
-use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\App\ResourceConnection;
+use Magento\Framework\Module\ModuleListInterface;
+use Magento\Store\Model\StoreManagerInterface;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class CheckModuleUsage extends Command
 {
-    protected const ARGUMENT_MODULE = 'Elgentos_ModuleCheck';
-    protected const OPTION_MODULE_NAME = 'module-name';
+    protected const string ARGUMENT_MODULE = 'Elgentos_ModuleCheck';
+    protected const string OPTION_MODULE_NAME = 'module-name';
 
     public function __construct(
-        private ModuleListInterface $moduleList,
-        private ScopeConfigInterface $scopeConfig,
-        private InputOption $inputOption,
-        private File $fileDriver,
-        private StoreManagerInterface $storeManager,
-        private ResourceConnection $resource
+        private readonly ModuleListInterface   $moduleList,
+        private readonly ScopeConfigInterface  $scopeConfig,
+        private readonly StoreManagerInterface $storeManager,
+        private readonly ResourceConnection    $resource
     ) {
-        parent::__construct();
+        parent::__construct('module:check-usage');
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $options = [
-            new InputArgument(
-                self::ARGUMENT_MODULE,
-                InputArgument::REQUIRED,
+            new InputOption(
+                self::OPTION_MODULE_NAME,
+                null,
+                InputOption::VALUE_REQUIRED,
                 'Module name'
             ),
         ];
         $this->setName('elgentos:check-module-usage')
-             ->setDescription("Check if a module is actively used in themes, stores, and database. \n bin/magento module:check-usage module-name=Vendor_Module");
+             ->setDescription("Check if a module is actively used");
         $this->setDefinition($options);
-        
-        // $this->addOption(
-        //     self::OPTION_MODULE_NAME,
-        //     null,
-        //     InputOption::VALUE_REQUIRED,
-        //     'Module name'
-        // );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $moduleName = $input->getArgument(self::ARGUMENT_MODULE);
+        $moduleName = $input->getOption(self::OPTION_MODULE_NAME);
+        if (!$moduleName) {
+            $output->writeln('<error>Module name is required</error>');
+            return Command::FAILURE;
+        }
+
         $output->writeln("Checking module: <info>$moduleName</info>");
 
         // Check if module is enabled
