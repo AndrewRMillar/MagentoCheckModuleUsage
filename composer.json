@@ -1,26 +1,39 @@
 {
-    "name": "elgentos/magento2-check-module-usage",
-    "description": "Magento2 extension to check is a module is in use",
+    "name": "andrewrmillar/magento-check-module-usage",
+    "description": "A Magento 2 module to check module usage.",
+    "require": {
+        "php": ">=8.1",
+        "magento/framework": "^103.0"
+    },
     "type": "magento2-module",
-    "license": "GPL-3.0",
+    "version": "1.0.0",
+    "license": "MIT",
     "authors": [
         {
-            "name": "Andrew Millar",
-            "email": "andrew@elgentos.nl"
+            "name": "Andrew R Millar",
+            "email": "andrew@millar.dev",
+            "homepage": "https://github.com/AndrewRMillar",
+            "role": "Developer"
         }
     ],
-    "minimum-stability": "dev",
-    "require": {
-        "php": "^8.0|^8.1|^8.2",
-        "magento/framework": "*",
-        "magento/module-store": "*"
-    },
     "autoload": {
-        "files": [
-            "src/registration.php"
-        ],
+        "files": [ "registration.php" ],
         "psr-4": {
-            "Elgentos\\MagentoCheckModuleUsage\\": "src/"
+            "AndrewRMillar\\MagentoCheckModuleUsage\\": ""
         }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/AndrewRMillar/MagentoCheckModuleUsage"
+        }
+    ],
+    "extra": {
+        "map": [
+            [
+                "*",
+                "AndrewRMillar/MagentoCheckModuleUsage"
+            ]
+        ]
     }
 }
