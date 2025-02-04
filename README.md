@@ -1,7 +1,8 @@
 # Magento 2 Module: Check Module Usage
 
 ## Overview
-This Magento 2 CLI module helps determine whether a specific module is in use within a Magento installation. It checks:
+
+This Magento 2 CLI module, primary for use in a develop environment, which helps determine whether a specific module is in use within a Magento installation. It checks:
 
 - If the module is enabled.
 - If the module has active configuration settings.
@@ -10,30 +11,32 @@ This Magento 2 CLI module helps determine whether a specific module is in use wi
 
 ## Installation
 
-### 1. Copy the Module to Magento
-Place the module in the `app/code/Vendor/ModuleCheck/` directory.
+### Copy or use composer
 
-### 2. Enable the Module
-Run the following commands:
-```sh
-bin/magento module:enable Vendor_ModuleCheck
-bin/magento setup:upgrade
-```
+Place the module in the `app/code/` directory and activate it through `bin/magento module:enable Vendor_ModuleCheck`. Or better yet use `composer install`
+
+- `composer require --dev andrewrmillar/magento-check-module-usage`
+- `bin/magento setup:upgrade`
 
 ## Usage
+
 To check if a module is in use, run:
+
 ```sh
 bin/magento module:check-usage Vendor_Module
 ```
+
 Replace `Vendor_Module` with the actual module name (e.g., `Magento_Catalog`).
 
 ## Features
+
 - **Checks if the module is enabled** using Magento's module registry.
 - **Verifies module configuration settings** dynamically.
 - **Checks for module-related database tables**.
 - **Scans frontend theme files** for module references.
 
 ## Example Output
+
 ```
 Checking module: Vendor_Module
 Module is enabled.
@@ -45,16 +48,18 @@ Check complete.
 ```
 
 ## Uninstallation
+
 To remove the module:
+
 ```sh
-bin/magento module:disable Vendor_ModuleCheck
-rm -rf app/code/Vendor/ModuleCheck
+composer remove andrewrmillar/magento-check-module-usage
 bin/magento setup:upgrade
 ```
 
 ## License
+
 This module is open-source and provided under the MIT License.
 
 ## Author
-Developed by Vendor. Contributions are welcome!
 
+Developed by [AndrewRMillar](https://github.com/AndrewRMillar). Contributions are welcome!
