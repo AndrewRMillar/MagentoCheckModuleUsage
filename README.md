@@ -2,6 +2,7 @@
 
 ## Overview
 
+Module in Alpha, not recomended for use yet.
 This Magento 2 CLI module, primary for use in a develop environment, which helps determine whether a specific module is in use within a Magento installation. It checks:
 
 - If the module is enabled.
@@ -13,10 +14,13 @@ This Magento 2 CLI module, primary for use in a develop environment, which helps
 
 ### Copy or use composer
 
-Place the module in the `app/code/` directory and activate it through `bin/magento module:enable Vendor_ModuleCheck`. Or better yet use `composer install`
+Clone the module in the `app/code/` directory and activate it through `bin/magento module:enable Vendor_ModuleCheck`. 
+Or better yet use `composer install`
 
-- `composer require --dev andrewrmillar/magento-check-module-usage`
-- `bin/magento setup:upgrade`
+```sh
+composer require --dev andrewrmillar/magento-check-module-usage`
+bin/magento setup:upgrade
+```
 
 ## Usage
 
